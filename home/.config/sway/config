@@ -14,10 +14,10 @@ bindsym $mod+Control+x exec swaylock -f -c 444444
 bindsym $mod+p exec ~/.config/rofi/screenshot-wayland.sh
 
 # quickswitch navigation
-bindsym $mod+m exec swaymsg '[title="'$(swaymsg -t get_tree | jq -r '.. | .title? // empty' | dmenu -p 'Focus window')'"] focus'
-bindsym $mod+Shift+m exec swaymsg "workspace $(swaymsg -t get_workspaces | jq -r '.[] | select(.name) | .name' | dmenu -p 'Focus workspace')"
-bindsym $mod+i exec swaymsg "move container to workspace $(swaymsg -t get_workspaces | jq -r '.[] | select(.name) | .name' | dmenu -p 'Move the current window to workspace')"
-bindsym $mod+Shift+i exec swaymsg '[title="'$(swaymsg -t get_tree | jq -r '.. | .title? // empty' | dmenu -p 'Move window to the current workspace')'"] move container to workspace current'
+bindsym $mod+m exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.nodes==[]) | .name' | dmenu -p 'Focus window' | xargs -I '$' swaymsg '[title="$"] focus'
+bindsym $mod+Shift+m exec swaymsg -t get_workspaces | jq -r '.[] | select(.name) | .name' | dmenu -p 'Focus workspace' | xargs -I '$' swaymsg "workspace $"
+bindsym $mod+i exec swaymsg -t get_workspaces | jq -r '.[] | select(.name) | .name' | dmenu -p 'Move the current window to workspace' | xargs -I '$' swaymsg "move container to workspace $"
+bindsym $mod+Shift+i exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.nodes==[]) | .name' | dmenu -p 'Move window to the current workspace' | xargs -I '$' swaymsg '[title="$"] move container to workspace current'
 
 # kill focused window
 bindsym $mod+Shift+q kill
