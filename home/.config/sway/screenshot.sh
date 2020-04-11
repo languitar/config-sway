@@ -1,9 +1,12 @@
 #!/bin/bash
 
-ACTION=$(cat <<EOF | wofi --dmenu -p "screenshot: " -kb-custom-1 "Alt+Return"
+ACTION=$(cat <<EOF | wofi --dmenu -p "screenshot: "
 All screens
+All screens (clipboard)
 Focused screen
+Focused screen (clipboard)
 Select area
+Select area (clipboard)
 EOF
 )
 EXIT="$?"
@@ -13,34 +16,27 @@ then
     exit
 fi
 
-if [ "$EXIT" = "10" ]
+mkdir -p ~/Pictures/Screenshots || exit
+cd ~/Pictures/Screenshots || exit
+
+filename="$(date --iso-8601=seconds).png"
+
+if [ "$ACTION" = "All screens" ]
 then
-
-    if [ "$ACTION" = "All screens" ]
-    then
-        grim - | wl-copy
-    elif [ "$ACTION" = "Focused screen" ]
-    then
-        grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') | wl-copy
-    elif [ "$ACTION" = "Select area" ]
-    then
-        grim -g "$(slurp)" | wl-copy
-    fi
-
-else
-
-    mkdir -p ~/Pictures/Screenshots || exit
-    cd ~/Pictures/Screenshots || exit
-
-    if [ "$ACTION" = "All screens" ]
-    then
-        grim "$(date --iso-8601=seconds).png"
-    elif [ "$ACTION" = "Focused screen" ]
-    then
-        grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')" "$(date --iso-8601=seconds).png"
-    elif [ "$ACTION" = "Select area" ]
-    then
-        grim -g "$(slurp)" "$(date --iso-8601=seconds).png"
-    fi
-
+    grim "${filename}"
+elif [ "$ACTION" = "All screens (clipboard)" ]
+then
+    grim - | wl-copy
+elif [ "$ACTION" = "Focused screen" ]
+then
+    grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')" "${filename}"
+elif [ "$ACTION" = "Focused screen (clipboard)" ]
+then
+    grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')" - | wl-copy
+elif [ "$ACTION" = "Select area" ]
+then
+    grim -g "$(slurp)" "${filename}"
+elif [ "$ACTION" = "Select area (clipboard)" ]
+then
+    grim -g "$(slurp)" - | wl-copy
 fi
