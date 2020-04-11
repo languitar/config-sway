@@ -3,10 +3,12 @@
     // "position": "bottom", // Waybar at the bottom of your screen
     // "height": 30, // Waybar height
     // "width": 1280, // Waybar width
+
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "battery", "battery#bat2", "clock", "tray"],
+    "modules-left": ["cpu", "memory", "custom/swap", "disk#root", "disk#home"],
+    "modules-center": ["sway/workspaces", "sway/mode"],
+    "modules-right": ["idle_inhibitor", "battery", "pulseaudio", "backlight", "clock", "tray"],
+
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -24,7 +26,7 @@
     //     }
     // },
     "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+        "format": "{}"
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -38,14 +40,23 @@
         "spacing": 10
     },
     "clock": {
+        "format": " {:%H:%M}",
         "tooltip-format": "{:%Y-%m-%d | %H:%M}",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-alt": " {:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% "
+        "format": " {usage:>3}%"
     },
     "memory": {
-        "format": "{}% "
+        "format": " {:>3}%"
+    },
+    "disk#root": {
+        "path": "/",
+        "format": " {path} {percentage_used:>3}%"
+    },
+    "disk#home": {
+        "path": "/home",
+        "format": "{path} {percentage_used:>3}%"
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -56,7 +67,7 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
+        "format": "{percent:>3}% {icon}",
         "format-icons": ["", ""]
     },
     "battery": {
@@ -65,13 +76,10 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
+        "format": "{capacity:>3}% {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
     },
     "network": {
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
@@ -81,8 +89,8 @@
     },
     "pulseaudio": {
         //"scroll-step": 1,
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
         "format-muted": "",
         "format-icons": {
             "headphones": "",
@@ -95,13 +103,13 @@
         },
         "on-click": "pavucontrol"
     },
-    "custom/spotify": {
-        "format": " {}",
-        "max-length": 40,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-    },
     "sway/window": {
         "format": "{}",
         "max-length": 40
+    },
+    "custom/swap": {
+        "format": " {percentage:>3}%",
+        "return-type": "json",
+        "exec": "~/.config/waybar/swap.sh"
     }
 }

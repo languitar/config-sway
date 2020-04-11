@@ -1,0 +1,182 @@
+* {
+    border: none;
+    border-radius: 0;
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: DejaVu Sans Mono, "Font Awesome 5 Free";
+    font-size: 13px;
+    min-height: 22px;
+}
+
+window#waybar {
+    background-color: #242424;
+    border-bottom: 0;
+    color: #dfdfdf;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    margin: 0 1px;
+    background-color: #3F3F3F;
+    color: #ffffff;
+    border-bottom: 3px solid transparent;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.0);
+    box-shadow: inherit;
+    border-bottom: 3px solid #ffffff;
+}
+
+#workspaces button.focused {
+    background-color: #64727D;
+    border-bottom: 3px solid #ffffff;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#mode {
+    background-color: #eb4d4b;
+}
+
+#custom-swap,
+#clock,
+#battery,
+#cpu,
+#disk,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#mpd {
+    padding: 0 8px;
+    /* margin: 0 4px; */
+    color: #ffffff;
+}
+
+#mode {
+    padding: 0 8px;
+    margin: 0 4px;
+    color: #ffffff;
+}
+
+/* #clock { */
+/*     background-color: #64727D; */
+/* } */
+
+#battery {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+#battery.charging {
+    color: #ffffff;
+    background-color: #26A65B;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+/* #cpu { */
+/*     background-color: #2ecc71; */
+/*     color: #000000; */
+/* } */
+
+/* #memory { */
+/*     background-color: #9b59b6; */
+/* } */
+
+/* #disk { */
+/*     background-color: #2980b9; */
+/* } */
+
+/* #backlight { */
+/*     background-color: #90b1b1; */
+/* } */
+
+/* #network { */
+/*     background-color: #2980b9; */
+/* } */
+
+/* #network.disconnected { */
+/*     background-color: #f53c3c; */
+/* } */
+
+/* #pulseaudio { */
+/*     background-color: #f1c40f; */
+/*     color: #000000; */
+/* } */
+
+/* #pulseaudio.muted { */
+/*     background-color: #90b1b1; */
+/*     color: #2a5c45; */
+/* } */
+
+/* #custom-swap { */
+/*     background-color: #9b59b6; */
+/* } */
+
+#temperature {
+    background-color: #f0932b;
+}
+
+#temperature.critical {
+    background-color: #eb4d4b;
+}
+
+/* #tray { */
+/*     background-color: #2980b9; */
+/* } */
+
+#idle_inhibitor {
+    background-color: #2d3436;
+}
+
+#idle_inhibitor.activated {
+    background-color: #ecf0f1;
+    color: #2d3436;
+}
+
+/* #mpd { */
+/*     background-color: #66cc99; */
+/*     color: #2a5c45; */
+/* } */
+/*  */
+/* #mpd.disconnected { */
+/*     background-color: #f53c3c; */
+/* } */
+/*  */
+/* #mpd.stopped { */
+/*     background-color: #90b1b1; */
+/* } */
+/*  */
+/* #mpd.paused { */
+/*     background-color: #51a37a; */
+/* } */

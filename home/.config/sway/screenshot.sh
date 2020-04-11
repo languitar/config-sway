@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ACTION=$(cat <<EOF | rofi -dmenu -p "screenshot: " -kb-custom-1 "Alt+Return"
+ACTION=$(cat <<EOF | wofi --dmenu -p "screenshot: " -kb-custom-1 "Alt+Return"
 All screens
 Focused screen
 Select area
@@ -22,7 +22,7 @@ then
     elif [ "$ACTION" = "Focused screen" ]
     then
         grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') | wl-copy
-    elif [ "$ACTION" = "Select window or area" ]
+    elif [ "$ACTION" = "Select area" ]
     then
         grim -g "$(slurp)" | wl-copy
     fi
@@ -37,8 +37,8 @@ else
         grim "$(date --iso-8601=seconds).png"
     elif [ "$ACTION" = "Focused screen" ]
     then
-        grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') "$(date --iso-8601=seconds).png"
-    elif [ "$ACTION" = "Select window or area" ]
+        grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')" "$(date --iso-8601=seconds).png"
+    elif [ "$ACTION" = "Select area" ]
     then
         grim -g "$(slurp)" "$(date --iso-8601=seconds).png"
     fi
