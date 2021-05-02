@@ -1,6 +1,6 @@
 set $mod Mod4
 
-font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono for Powerline 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod normal
@@ -39,6 +39,7 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+bindsym $mod+Tab focus output left
 
 # alternatively, you can use the cursor keys:
 # bindsym $mod+Left focus left
@@ -57,8 +58,6 @@ bindsym $mod+Control+l move right
 # bindsym $mod+Shift+Down move down
 # bindsym $mod+Shift+Up move up
 # bindsym $mod+Shift+Right move right
-
-workspace_layout tabbed
 
 # split in horizontal orientation
 bindsym $mod+b split h
@@ -87,7 +86,9 @@ bindsym $mod+a focus parent
 bindsym $mod+q focus child
 
 bindsym $mod+Left workspace prev_on_output
+bindsym $mod+Shift+h workspace prev_on_output
 bindsym $mod+Right workspace next_on_output
+bindsym $mod+Shift+l workspace next_on_output
 
 bindsym $mod+Shift+n exec i3-input -F 'rename workspace to "%s"' -P 'Rename workspace: '
 bindsym $mod+n exec i3-input -F 'workspace "%s"' -P 'Create workspace: '
@@ -109,7 +110,7 @@ bindsym $mod+1 workspace number 1 www
 bindsym $mod+2 workspace number 2 mail
 bindsym $mod+3 workspace number 3 chat
 bindsym $mod+4 workspace number 4 music
-bindsym $mod+5 workspace number 5
+bindsym $mod+5 workspace number 5 www-sup
 bindsym $mod+6 workspace number 6
 bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
@@ -175,20 +176,24 @@ input type:keyboard {
     xkb_options compose:menu
 }
 
+# default layout
+workspace_layout tabbed
+default_orientation auto
+
 # media keys
 bindsym XF86MonBrightnessUp exec bash -c "xbacklight -time 0 -inc 10 && notify-send -t 1000 -a display -i display-brightness -h int:value:\$(xbacklight -get) -h string:synchronous:brightness brightness"
 bindsym XF86MonBrightnessDown exec bash -c "xbacklight -time 0 -dec 10 && notify-send -t 1000 -a display -i display-brightness -h int:value:\$(xbacklight -get) -h string:synchronous:brightness brightness"
 bindsym XF86AudioLowerVolume exec bash -c "notify-send -t 1000 -a volume -i audio-volume-medium -h int:value:\$(amixer -D pulse sset Master 5%- | grep 'Front Left:' | sed 's/.*\[\([0-9]*\)%\].*/\1/') -h string:synchronous:volume volume"
 bindsym XF86AudioRaiseVolume exec bash -c "notify-send -t 1000 -a volume -i audio-volume-medium -h int:value:\$(amixer -D pulse sset Master 5%+ | grep 'Front Left:' | sed 's/.*\[\([0-9]*\)%\].*/\1/') -h string:synchronous:volume volume"
 bindsym XF86AudioMute exec bash -c "state=$(amixer -D pulse set Master 1+ toggle | grep \'Front Left:\' | sed \'s/.*\[\(.*\)\]$/\1/\'); if [[ \$state == on ]]; then notify-send -t 1000 -a volume -i audio-volume-medium unmuted; else notify-send -t 1000 -a volume -i audio-volume-muted muted; fi"
-bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
-bindsym XF86AudioStop  exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
-bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
-bindsym XF86AudioMicMute exec amixer -c 0 set Capture toggle
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop  exec playerctl stop
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 # Workspace and window assignments
 for_window [class="Spotify"] move to workspace 4 music
+for_window [class="ncspot"] move to workspace 4 music
 for_window [app_id="(T|t)hunderbird"] move to workspace 2 mail
 for_window [app_id="^mcabber$"] move to workspace 3 chat
 for_window [app_id="^weechat$"] move to workspace 3 chat
