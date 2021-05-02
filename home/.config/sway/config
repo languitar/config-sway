@@ -181,15 +181,17 @@ workspace_layout tabbed
 default_orientation auto
 
 # media keys
-bindsym XF86MonBrightnessUp exec bash -c "xbacklight -time 0 -inc 10 && notify-send -t 1000 -a display -i display-brightness -h int:value:\$(xbacklight -get) -h string:synchronous:brightness brightness"
-bindsym XF86MonBrightnessDown exec bash -c "xbacklight -time 0 -dec 10 && notify-send -t 1000 -a display -i display-brightness -h int:value:\$(xbacklight -get) -h string:synchronous:brightness brightness"
-bindsym XF86AudioLowerVolume exec bash -c "notify-send -t 1000 -a volume -i audio-volume-medium -h int:value:\$(amixer -D pulse sset Master 5%- | grep 'Front Left:' | sed 's/.*\[\([0-9]*\)%\].*/\1/') -h string:synchronous:volume volume"
-bindsym XF86AudioRaiseVolume exec bash -c "notify-send -t 1000 -a volume -i audio-volume-medium -h int:value:\$(amixer -D pulse sset Master 5%+ | grep 'Front Left:' | sed 's/.*\[\([0-9]*\)%\].*/\1/') -h string:synchronous:volume volume"
-bindsym XF86AudioMute exec bash -c "state=$(amixer -D pulse set Master 1+ toggle | grep \'Front Left:\' | sed \'s/.*\[\(.*\)\]$/\1/\'); if [[ \$state == on ]]; then notify-send -t 1000 -a volume -i audio-volume-medium unmuted; else notify-send -t 1000 -a volume -i audio-volume-muted muted; fi"
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioStop  exec playerctl stop
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioStop  exec playerctl stop
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
 
 # Workspace and window assignments
 for_window [class="Spotify"] move to workspace 4 music
