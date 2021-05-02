@@ -13,8 +13,8 @@ bindsym $mod+Shift+v exec clipman clear -t wofi
 # start a terminal
 bindsym $mod+Return exec kitty -e fish
 # password utilities
-bindsym $mod+t exec passmenu --type
-bindsym $mod+Shift+t exec passusermenu
+bindsym $mod+t exec ~/.local/bin/wofipass
+bindsym $mod+Shift+t exec ~/.local/bin/wofiuserpass
 bindsym $mod+Control+x exec swaylock -f -c 444444
 bindsym $mod+p exec ~/.config/sway/screenshot.sh
 
