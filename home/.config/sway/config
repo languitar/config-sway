@@ -196,8 +196,10 @@ bindsym --locked XF86AudioPrev exec playerctl previous
 # Workspace and window assignments
 for_window [class="Spotify"] move to workspace 4 music
 for_window [class="ncspot"] move to workspace 4 music
+for_window [app_id="ncspot"] move to workspace 4 music
 for_window [app_id="(T|t)hunderbird"] move to workspace 2 mail
 for_window [app_id="^mcabber$"] move to workspace 3 chat
+for_window [class="Element"] move to workspace 3 chat
 for_window [app_id="^weechat$"] move to workspace 3 chat
 
 # floating windows
