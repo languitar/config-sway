@@ -90,8 +90,8 @@ bindsym $mod+Shift+h workspace prev_on_output
 bindsym $mod+Right workspace next_on_output
 bindsym $mod+Shift+l workspace next_on_output
 
-bindsym $mod+Shift+n exec i3-input -F 'rename workspace to "%s"' -P 'Rename workspace: '
-bindsym $mod+n exec i3-input -F 'workspace "%s"' -P 'Create workspace: '
+bindsym $mod+Shift+n exec "i3-msg rename workspace to $(wofi --dmenu --lines 1 -p 'New name')"
+bindsym $mod+n exec "i3-msg workspace $(wofi --dmenu --lines 1 -p 'New name')"
 
 bindsym $mod+y [urgent=latest] focus
 
@@ -130,7 +130,7 @@ bindsym $mod+0 workspace number 10
 # bindsym $mod+Shift+0 move container to workspace 10
 
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e exec ~/.config/rofi/exit.sh
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
