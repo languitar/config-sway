@@ -208,6 +208,13 @@ for_window [window_role="pop-up"] floating enable
 for_window [class="(P|p)inentry"] floating enable
 for_window [window_role="task_dialog"] floating enable
 
+# Work around slow GTK startup
+# https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
+# https://github.com/swaywm/sway/issues/5732
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
 # floating terminal
 exec --no-startup-id kitty --class floating-terminal -e fish
 for_window [app_id="^floating-terminal$"] move scratchpad
