@@ -213,7 +213,7 @@ for_window [window_role="task_dialog"] floating enable
 # https://github.com/swaywm/sway/issues/5732
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
-     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
 # floating terminal
 exec --no-startup-id kitty --class floating-terminal -e fish
