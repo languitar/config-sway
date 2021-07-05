@@ -226,6 +226,6 @@ exec swayidle -w \
     resume 'swaymsg "output * dpms on"' \
     before-sleep 'swaylock -f -c 444444'
 exec --no-startup-id mako
-exec --no-startup-id dex -a -e i3
+exec --no-startup-id dex -a -e SWAY
 
 include ~/.config/sway/config.d/*
