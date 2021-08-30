@@ -11,7 +11,7 @@ bindsym $mod+Control+v exec clipman pick -t wofi
 bindsym $mod+Shift+v exec clipman clear -t wofi
 
 # start a terminal
-bindsym $mod+Return exec kitty -e fish
+bindsym $mod+Return exec alacritty
 # password utilities
 bindsym $mod+t exec ~/.local/bin/wofipass
 bindsym $mod+Shift+t exec ~/.local/bin/wofiuserpass
