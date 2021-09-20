@@ -216,7 +216,7 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
 # floating terminal
-exec --no-startup-id kitty --class floating-terminal -e fish
+exec --no-startup-id alacritty --class floating-terminal
 for_window [app_id="^floating-terminal$"] move scratchpad
 
 # autostart
