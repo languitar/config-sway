@@ -172,7 +172,6 @@ bar {
 # General device settings
 input type:keyboard {
     xkb_layout us
-    xkb_variant ,nodeadkeys
     xkb_options compose:menu
 }
 
