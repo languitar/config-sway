@@ -2,7 +2,7 @@
     border: none;
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: DejaVu Sans Mono, "Font Awesome 5 Free";
+    font-family: DejaVu Sans Mono, "Font Awesome 6 Free";
     font-size: 13px;
     min-height: 22px;
 }
