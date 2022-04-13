@@ -175,6 +175,11 @@ input type:keyboard {
     xkb_options compose:menu
 }
 
+input type:touchpad {
+    natural_scroll enabled
+    tap enabled
+}
+
 # default layout
 workspace_layout tabbed
 default_orientation auto
