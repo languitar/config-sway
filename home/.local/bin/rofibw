@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+
+
+if [ "${1}" = "--user" ]
+then
+    dmenu_prompt="Type username for"
+else
+    dmenu_prompt="Type password for"
+fi
+
+IFS=$'\t' read -r name user folder <<< "$(rbw list --fields name,user,folder | dmenu -p "${dmenu_prompt}")"
+if [ -z "${name}" ]
+then
+    exit 1
+fi
+
+if [ "${1}" = "--user" ]
+then
+    echo "${user}"
+else
+
+    cmd=(get)
+
+    if [ -n "${folder}" ]
+    then
+        cmd+=(--folder "${folder}")
+    fi
+
+    cmd+=("${name}")
+
+    if [ -n "$user" ]
+    then
+        cmd+=("${user}")
+    fi
+
+    rbw "${cmd[@]}"
+
+fi | { read -r pass; printf %s "$pass"; } | wtype -s 150 -

@@ -7,22 +7,22 @@ floating_modifier $mod normal
 
 # clipboard
 exec wl-paste -t text --watch clipman store 1>> ~/.local/share/clipman/clipman.log 2>&1 &
-bindsym $mod+Control+v exec clipman pick -t wofi
-bindsym $mod+Shift+v exec clipman clear -t wofi
+bindsym $mod+Control+v exec clipman pick -t rofi
+bindsym $mod+Shift+v exec clipman clear -t rofi
 
 # start a terminal
 bindsym $mod+Return exec foot
 # password utilities
-bindsym $mod+t exec ~/.local/bin/wofipass
-bindsym $mod+Shift+t exec ~/.local/bin/wofiuserpass
+bindsym $mod+t exec ~/.local/bin/rofibw
+bindsym $mod+Shift+t exec ~/.local/bin/rofibw --user
 bindsym $mod+Control+x exec swaylock -f -c 444444
 bindsym $mod+p exec ~/.config/sway/screenshot.sh
 
 # quickswitch navigation
-bindsym $mod+m exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.nodes==[]) | .name' | grep -v '__i3_scratch' | wofi --dmenu -p 'Focus window' | xargs -I '$' swaymsg '[title="$"] focus'
-bindsym $mod+Shift+m exec swaymsg -t get_workspaces | jq -r '.[] | select(.name) | .name' | wofi --dmenu -p 'Focus workspace' | xargs -I '$' swaymsg "workspace $"
-bindsym $mod+i exec swaymsg -t get_workspaces | jq -r '.[] | select(.name) | .name' | grep -v '__i3_scratch' | wofi --dmenu -p 'Move the current window to workspace' | xargs -I '$' swaymsg "move container to workspace $"
-bindsym $mod+Shift+i exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.nodes==[]) | .name' | grep -v '__i3_scratch' | wofi --dmenu -p 'Move window to the current workspace' | xargs -I '$' swaymsg '[title="$"] move container to workspace current'
+bindsym $mod+m exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.nodes==[]) | .name' | grep -v '__i3_scratch' | rofi -dmenu -p 'Focus window' | xargs -I '$' swaymsg '[title="$"] focus'
+bindsym $mod+Shift+m exec swaymsg -t get_workspaces | jq -r '.[] | select(.name) | .name' | rofi -dmenu -p 'Focus workspace' | xargs -I '$' swaymsg "workspace $"
+bindsym $mod+i exec swaymsg -t get_workspaces | jq -r '.[] | select(.name) | .name' | grep -v '__i3_scratch' | rofi -dmenu -p 'Move the current window to workspace' | xargs -I '$' swaymsg "move container to workspace $"
+bindsym $mod+Shift+i exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.nodes==[]) | .name' | grep -v '__i3_scratch' | rofi -dmenu -p 'Move window to the current workspace' | xargs -I '$' swaymsg '[title="$"] move container to workspace current'
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -31,8 +31,8 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # start dmenu (a program launcher)
-bindsym $mod+space exec wofi --show run
-bindsym $mod+d exec wofi --show drun
+bindsym $mod+space exec rofi -show run
+bindsym $mod+d exec rofi -show drun
 
 # change focus
 bindsym $mod+h focus left
@@ -90,8 +90,8 @@ bindsym $mod+Shift+h workspace prev_on_output
 bindsym $mod+Right workspace next_on_output
 bindsym $mod+Shift+l workspace next_on_output
 
-bindsym $mod+Shift+n exec "i3-msg rename workspace to $(wofi --dmenu --lines 1 -p 'New name')"
-bindsym $mod+n exec "i3-msg workspace $(wofi --dmenu --lines 1 -p 'New name')"
+bindsym $mod+Shift+n exec "i3-msg rename workspace to $(rofi -dmenu --lines 1 -p 'New name')"
+bindsym $mod+n exec "i3-msg workspace $(rofi -dmenu --lines 1 -p 'New name')"
 
 bindsym $mod+y [urgent=latest] focus
 
