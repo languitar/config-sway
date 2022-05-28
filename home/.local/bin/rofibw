@@ -11,7 +11,12 @@ else
     dmenu_prompt="Type password for"
 fi
 
-IFS=$'\t' read -r name user folder <<< "$(rbw list --fields name,user,folder | dmenu -p "${dmenu_prompt}")"
+output="$(rbw list --fields name,user,folder | dmenu -p "${dmenu_prompt}")"
+
+name="$(echo "${output}" | cut -f 1)"
+user="$(echo "${output}" | cut -f 2)"
+folder="$(echo "${output}" | cut -f 3)"
+
 if [ -z "${name}" ]
 then
     exit 1
