@@ -230,4 +230,7 @@ exec swayidle -w \
 exec --no-startup-id mako
 exec --no-startup-id 'sleep 2; dex -a -e SWAY'
 
+# Support polkit authentication
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
 include ~/.config/sway/config.d/*
