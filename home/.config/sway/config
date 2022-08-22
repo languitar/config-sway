@@ -19,10 +19,10 @@ bindsym $mod+Control+x exec swaylock -f -c 444444
 bindsym $mod+p exec ~/.config/sway/screenshot.sh
 
 # quickswitch navigation
-bindsym $mod+m exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.nodes==[]) | .name' | grep -v '__i3_scratch' | rofi -dmenu -p 'Focus window' | xargs -I '$' swaymsg '[title="$"] focus'
-bindsym $mod+Shift+m exec swaymsg -t get_workspaces | jq -r '.[] | select(.name) | .name' | rofi -dmenu -p 'Focus workspace' | xargs -I '$' swaymsg "workspace $"
-bindsym $mod+i exec swaymsg -t get_workspaces | jq -r '.[] | select(.name) | .name' | grep -v '__i3_scratch' | rofi -dmenu -p 'Move the current window to workspace' | xargs -I '$' swaymsg "move container to workspace $"
-bindsym $mod+Shift+i exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.nodes==[]) | .name' | grep -v '__i3_scratch' | rofi -dmenu -p 'Move window to the current workspace' | xargs -I '$' swaymsg '[title="$"] move container to workspace current'
+bindsym $mod+Shift+m exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.nodes==[]) | .name' | grep -v '__i3_scratch' | rofi -dmenu -i -p 'Focus window' | xargs -I '$' swaymsg '[title="$"] focus'
+bindsym $mod+m exec swaymsg -t get_workspaces | jq -r '.[] | select(.name) | .name' | rofi -dmenu -i -p 'Focus workspace' | xargs -I '$' swaymsg "workspace $"
+bindsym $mod+i exec swaymsg -t get_workspaces | jq -r '.[] | select(.name) | .name' | grep -v '__i3_scratch' | rofi -dmenu -i -p 'Move the current window to workspace' | xargs -I '$' swaymsg "move container to workspace $"
+bindsym $mod+Shift+i exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.nodes==[]) | .name' | grep -v '__i3_scratch' | rofi -dmenu -i -p 'Move window to the current workspace' | xargs -I '$' swaymsg '[title="$"] move container to workspace current'
 
 # kill focused window
 bindsym $mod+Shift+q kill
