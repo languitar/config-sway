@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ACTION=$(cat <<EOF | rofi -dmenu -p "screenshot: "
+ACTION=$(cat <<EOF | wofi --dmenu -p "screenshot: "
 All screens
 All screens (clipboard)
 Focused screen
