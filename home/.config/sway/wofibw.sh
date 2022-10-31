@@ -10,7 +10,10 @@ else
     dmenu_prompt="Type password for"
 fi
 
-output="$(rbw list --fields name,user,folder | wofi --dmenu -p "${dmenu_prompt}")"
+# in case rbw has to ask for a passphrase, do this before focus of wofi and rbw compete
+options="$(rbw list --fields name,user,folder)"
+
+output="$(echo -e "${options}" | wofi --dmenu -p "${dmenu_prompt}")"
 
 name="$(echo "${output}" | cut -f 1)"
 user="$(echo "${output}" | cut -f 2)"
