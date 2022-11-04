@@ -16,6 +16,9 @@
     "sway/mode": {
         "format": "{}"
     },
+    "sway/language": {
+        "format": " {short} {variant}",
+    },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
@@ -55,7 +58,7 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent:>3}% {icon}",
+        "format": "{icon} {percent:>3}%",
         "format-icons": ["", ""]
     },
     "battery": {
