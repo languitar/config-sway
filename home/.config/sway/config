@@ -90,8 +90,8 @@ bindsym $mod+Shift+h workspace prev_on_output
 bindsym $mod+Right workspace next_on_output
 bindsym $mod+Shift+l workspace next_on_output
 
-bindsym $mod+Shift+n exec "i3-msg rename workspace to $(wofi --dmenu --lines 1 -p 'New name')"
-bindsym $mod+n exec "i3-msg workspace $(wofi --dmenu --lines 1 -p 'New name')"
+bindsym $mod+Shift+n exec "swaymsg rename workspace to $(wofi --dmenu --lines 1 -p 'New name')"
+bindsym $mod+n exec "swaymsg workspace $(wofi --dmenu --lines 1 -p 'New name')"
 
 bindsym $mod+y [urgent=latest] focus
 
