@@ -5,9 +5,8 @@
     // "width": 1280, // Waybar width
 
     // Choose the order of the modules
-    "modules-left": ["cpu", "memory", "custom/swap", "disk#root", "disk#home"],
-    "modules-center": ["sway/workspaces", "sway/mode"],
-    "modules-right": ["idle_inhibitor", "battery", "pulseaudio", "backlight", "sway/language", "clock", "tray"],
+    "modules-left": ["idle_inhibitor", "sway/workspaces", "sway/mode"],
+    "modules-right": ["memory#ram", "memory#swap", "disk#root", "disk#docker", "disk#home", "pulseaudio", "backlight", "battery", "sway/language", "tray", "clock"],
 
     // Modules configuration
     "sway/workspaces": {
@@ -17,7 +16,8 @@
         "format": "{}"
     },
     "sway/language": {
-        "format": " {short} {variant}",
+        "format": " {short}",
+        "on-click": "swaymsg input type:keyboard xkb_switch_layout next"
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -38,16 +38,49 @@
     "cpu": {
         "format": " {usage:>3}%"
     },
-    "memory": {
-        "format": " {:>3}%"
+    "memory#ram": {
+        "format": " {percentage:>2}%",
+        "states": {
+            "warning": 90,
+            "critical": 95
+        }
+    },
+    "memory#swap": {
+        "format": " {swapPercentage:>2}%",
+        "states": {
+            "warning": 90,
+            "critical": 95
+        }
     },
     "disk#root": {
         "path": "/",
-        "format": " {path} {percentage_used:>3}%"
+        "format": "",
+        "format-warning": " {path} {percentage_used}%",
+        "format-critical": " {path} {percentage_used}%",
+        "states": {
+            "warning": 90,
+            "critical": 95
+        }
     },
     "disk#home": {
         "path": "/home",
-        "format": "{path} {percentage_used:>3}%"
+        "format": "",
+        "format-warning": " {path} {percentage_used}%",
+        "format-critical": " {path} {percentage_used}%",
+        "states": {
+            "warning": 90,
+            "critical": 95
+        }
+    },
+    "disk#docker": {
+        "path": "/var/lib/docker",
+        "format": "",
+        "format-warning": " {path} {percentage_used}%",
+        "format-critical": " {path} {percentage_used}%",
+        "states": {
+            "warning": 90,
+            "critical": 95
+        }
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -58,8 +91,7 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{icon} {percent:>3}%",
-        "format-icons": ["", ""]
+        "format": " {percent:>2}%",
     },
     "battery": {
         "states": {
@@ -67,7 +99,7 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity:>3}% {icon}",
+        "format": "{icon} {capacity:>2}%",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
@@ -98,9 +130,7 @@
         "format": "{}",
         "max-length": 40
     },
-    "custom/swap": {
-        "format": " {percentage:>3}%",
-        "return-type": "json",
-        "exec": "~/.config/waybar/swap.sh"
+    "custom/spacer": {
+        "format": "  "
     }
 }
