@@ -200,18 +200,23 @@ bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
 
 # Workspace and window assignments
+for_window [app_id="firefox"] move to workspace 1 www
 for_window [class="ncspot"] move to workspace 4 music
 for_window [app_id="ncspot"] move to workspace 4 music
 for_window [app_id="(T|t)hunderbird"] move to workspace 2 mail
 for_window [app_id="^mcabber$"] move to workspace 3 chat
 for_window [app_id="Electron" title="Element.*"] move to workspace 3 chat
 for_window [app_id="^weechat$"] move to workspace 3 chat
+for_window [app_id="Slack"] move to workspace 3 chat
+for_window [app_id="Element"] move to workspace 3 chat
+for_window [app_id="Rocket.Chat"] move to workspace 3 chat
 
 # floating windows
 for_window [app_id="thunderbird" instance="Dialog"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [class="jetbrains-.*" title="splash"] floating enable
+for_window [title="Firefox — Sharing Indicator"] floating enable
 
 # Work around slow GTK startup
 # https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
