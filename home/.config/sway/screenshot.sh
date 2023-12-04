@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ACTION=$(cat <<EOF | wofi --dmenu -p "screenshot: "
+Flameshot delayed
 All screens
 All screens (clipboard)
 Focused screen
@@ -39,4 +40,7 @@ then
 elif [ "$ACTION" = "Select area (clipboard)" ]
 then
     grim -g "$(slurp)" - | wl-copy
+elif [ "$ACTION" = "Flameshot delayed" ]
+then
+    flameshot gui --delay 5000
 fi
