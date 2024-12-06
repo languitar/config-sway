@@ -200,7 +200,6 @@ bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
 
 # Workspace and window assignments
-for_window [app_id="firefox"] move to workspace 1 www
 for_window [class="ncspot"] move to workspace 4 music
 for_window [app_id="ncspot"] move to workspace 4 music
 for_window [app_id="(T|t)hunderbird"] move to workspace 2 mail
