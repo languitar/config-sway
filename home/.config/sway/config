@@ -28,7 +28,9 @@ bindsym $mod+Shift+i exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[]
 bindsym $mod+Shift+q kill
 
 bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show
+bindsym $mod+minus [app_id="floating-terminal"] scratchpad show
+bindsym $mod+backspace [class="Logseq"] scratchpad show
+bindsym $mod+Shift+backspace scratchpad show
 
 # start dmenu (a program launcher)
 bindsym $mod+space exec wofi --show run
@@ -200,6 +202,7 @@ bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
 
 # Workspace and window assignments
+for_window [app_id="firefox"] move to workspace 1 www
 for_window [class="ncspot"] move to workspace 4 music
 for_window [app_id="ncspot"] move to workspace 4 music
 for_window [app_id="(T|t)hunderbird"] move to workspace 2 mail
@@ -227,6 +230,7 @@ exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSO
 # floating terminal
 exec --no-startup-id foot --app-id=floating-terminal
 for_window [app_id="^floating-terminal$"] move scratchpad
+for_window [class="Logseq"] move scratchpad
 
 # autostart
 exec swayidle -w \
