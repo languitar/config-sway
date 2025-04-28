@@ -6,9 +6,7 @@ font pango:DejaVu Sans Mono for Powerline 8
 floating_modifier $mod normal
 
 # clipboard
-exec wl-paste -t text --watch clipman store 1>> ~/.local/share/clipman/clipman.log 2>&1 &
-bindsym $mod+Control+v exec clipman pick -t wofi
-bindsym $mod+Shift+v exec clipman clear -t wofi
+exec wl-paste --watch cliphist store
 
 # start a terminal
 bindsym $mod+Return exec foot
