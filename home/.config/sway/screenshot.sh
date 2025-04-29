@@ -1,13 +1,9 @@
 #!/bin/bash
 
 ACTION=$(cat <<EOF | wofi --dmenu -p "screenshot: "
-Flameshot delayed
-All screens
-All screens (clipboard)
-Focused screen
-Focused screen (clipboard)
-Select area
-Select area (clipboard)
+Everything
+Current screen
+Window
 EOF
 )
 EXIT="$?"
@@ -22,25 +18,14 @@ cd ~/Pictures/Screenshots || exit
 
 filename="$(date --iso-8601=seconds).png"
 
-if [ "$ACTION" = "All screens" ]
+if [ "$ACTION" = "Everything" ]
 then
-    grim "${filename}"
-elif [ "$ACTION" = "All screens (clipboard)" ]
+    grim -t ppm - | satty --filename - --output-filename "${filename}"
+elif [ "$ACTION" = "Current screen" ]
 then
-    grim - | wl-copy
-elif [ "$ACTION" = "Focused screen" ]
+    grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')" -t ppm - | satty --filename - --output-filename "${filename}"
+elif [ "$ACTION" = "Window" ]
 then
-    grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')" "${filename}"
-elif [ "$ACTION" = "Focused screen (clipboard)" ]
-then
-    grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')" - | wl-copy
-elif [ "$ACTION" = "Select area" ]
-then
-    grim -g "$(slurp)" "${filename}"
-elif [ "$ACTION" = "Select area (clipboard)" ]
-then
-    grim -g "$(slurp)" - | wl-copy
-elif [ "$ACTION" = "Flameshot delayed" ]
-then
-    flameshot gui --delay 5000
+    id=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | "\(.name) - \(.id)"' | wofi -p window --dmenu | tr ' - ' '\n' | tail -1)
+    grim -g "$(swaymsg -t get_tree | jq -r ".. | select(.id?==${id}) | .rect | \"\(.x),\(.y) \(.width)x\(.height)\"")" -t ppm - | satty --filename - --output-filename "${filename}"
 fi

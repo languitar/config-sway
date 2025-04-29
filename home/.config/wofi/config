@@ -5,6 +5,6 @@ width=1200
 
 drun-display_generic=true
 
-key_expand=Control_L-o
+key_expand=Ctrl-o
 
 gtk_dark=true
