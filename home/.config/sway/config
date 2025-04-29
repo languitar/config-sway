@@ -15,6 +15,7 @@ bindsym $mod+t exec ~/.config/sway/wofibw.sh
 bindsym $mod+Shift+t exec ~/.config/sway/wofibw.sh --user
 bindsym $mod+Control+x exec swaylock -f -c 444444
 bindsym $mod+p exec ~/.config/sway/screenshot.sh
+bindsym $mod+Shift+p exec ~/.config/sway/screenshot.sh --delay
 
 # quickswitch navigation
 bindsym $mod+Shift+m exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.nodes==[]) | .name' | grep -v '__i3_scratch' | wofi --dmenu -i -p 'Focus window' | xargs -I '$' swaymsg '[title="$"] focus'

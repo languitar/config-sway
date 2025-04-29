@@ -1,6 +1,12 @@
 #!/bin/bash
 
-ACTION=$(cat <<EOF | wofi --dmenu -p "screenshot: "
+prompt="screenshot: "
+if [ "$1" = "--delay" ]
+then
+  prompt="screenshot (5s delay): "
+fi
+
+ACTION=$(cat <<EOF | wofi --dmenu -p "${prompt}"
 Everything
 Current screen
 Window
@@ -11,6 +17,11 @@ EXIT="$?"
 if [ "$EXIT" = "1" ]
 then
     exit
+fi
+
+if [ "$1" = "--delay" ]
+then
+  sleep 5
 fi
 
 mkdir -p ~/Pictures/Screenshots || exit
