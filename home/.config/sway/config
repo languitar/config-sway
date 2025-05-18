@@ -13,6 +13,7 @@ bindsym $mod+Return exec foot
 # password utilities
 bindsym $mod+t exec ~/.config/sway/wofibw.sh
 bindsym $mod+Shift+t exec ~/.config/sway/wofibw.sh --user
+bindsym $mod+Shift+0 exec ~/.config/sway/ykoath.sh
 bindsym $mod+Control+x exec swaylock -f -c 444444
 bindsym $mod+p exec ~/.config/sway/screenshot.sh
 bindsym $mod+Shift+p exec ~/.config/sway/screenshot.sh --delay
