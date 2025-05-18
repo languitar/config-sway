@@ -209,7 +209,7 @@ for_window [class="ncspot"] move to workspace 4 music
 for_window [app_id="ncspot"] move to workspace 4 music
 for_window [app_id="(T|t)hunderbird"] move to workspace 2 mail
 for_window [app_id="^mcabber$"] move to workspace 3 chat
-for_window [app_id="Electron" title="Element.*"] move to workspace 3 chat
+for_window [title="Element.*"] move to workspace 3 chat
 for_window [app_id="^weechat$"] move to workspace 3 chat
 for_window [app_id="Slack"] move to workspace 3 chat
 for_window [app_id="Element"] move to workspace 3 chat
